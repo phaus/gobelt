@@ -1,4 +1,4 @@
-FROM golang:1.8.3-stretch
+FROM golang:1.11.0-stretch
 RUN apt-get update -y  && apt-get upgrade -y
 
 ARG UPX_VER=3.94
