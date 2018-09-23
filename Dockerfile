@@ -1,4 +1,4 @@
-FROM golang:1.8.3-stretch
+FROM golang:1.11.0-stretch
 RUN apt-get update -y  && apt-get upgrade -y
 
 ARG UPX_VER=3.94
@@ -16,3 +16,6 @@ RUN wget --quiet https://github.com/upx/upx/releases/download/v${UPX_VER}/upx-${
     tar -xJf ./upx-${UPX_VER}-amd64_linux.tar.xz && \
     mv upx-${UPX_VER}-amd64_linux/upx /usr/bin/ && \
     chmod +x /usr/bin/upx
+
+RUN apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
