@@ -2,10 +2,12 @@
 
 Tools in this Image:
 
-* upx 
-* xz-utils 
+* appimagetool 11
+* appstream
+* build-essential
+* golang-glide
 * hfsprogs
-* golang-glide 
-* build-essential 
+* upx 3.95
+* xz-utils
 * libgtk-3-dev
 * libwebkit2gtk-4.0-dev
