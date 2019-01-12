@@ -1,7 +1,7 @@
 FROM golang:1.11.0-stretch
 RUN apt-get update -y  && apt-get upgrade -y
 
-ARG UPX_VER=3.95
+ARG UPX_VER=3.94
 ARG APP_IMAGE_VER=11
 
 RUN apt-get install -y \
