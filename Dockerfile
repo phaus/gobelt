@@ -12,6 +12,7 @@ RUN apt-get install -y \
     build-essential \ 
     libgtk-3-dev \ 
     libwebkit2gtk-4.0-dev \
+    libc6-dev-i386 \
     appstream
 
 RUN wget --quiet https://github.com/upx/upx/releases/download/v${UPX_VER}/upx-${UPX_VER}-amd64_linux.tar.xz 2>&1 && \
