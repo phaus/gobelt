@@ -8,6 +8,7 @@ RUN apt-get install -y \
     xz-utils \ 
     hfsprogs \ 
     zip \ 
+    git-lfs \
     golang-glide \ 
     build-essential \ 
     libgtk-3-dev \ 
