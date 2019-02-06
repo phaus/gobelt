@@ -1,4 +1,7 @@
 FROM golang:1.11.0-stretch
+
+COPY template/sources.list /etc/apt/sources.list
+
 RUN apt-get update -y  && apt-get upgrade -y
 
 ARG UPX_VER=3.94
