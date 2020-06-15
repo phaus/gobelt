@@ -1,11 +1,11 @@
-FROM golang:1.11.0-stretch
+FROM golang:1.14.0-stretch
 
 COPY template/sources.list /etc/apt/sources.list
 
 RUN apt-get update -y  && apt-get upgrade -y
 
-ARG UPX_VER=3.94
-ARG APP_IMAGE_VER=11
+ARG UPX_VER=3.96
+ARG APP_IMAGE_VER=12
 
 RUN apt-get install -y \
     xz-utils \ 
