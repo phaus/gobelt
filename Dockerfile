@@ -1,39 +1,25 @@
-FROM golang:1.14.4-stretch
+FROM golang:1.14.0-stretch
+
+COPY template/sources.list /etc/apt/sources.list
+
+RUN apt-get update -y  && apt-get upgrade -y
+
+RUN curl -O https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh && bash script.deb.sh
 
 ARG UPX_VER=3.96
 ARG APP_IMAGE_VER=12
 
-COPY template/sources.list /etc/apt/sources.list
-
-RUN dpkg --add-architecture i386
-
-RUN apt-get update -y && apt-get upgrade -y
-
 RUN apt-get install -y \
-    xz-utils \
-    hfsprogs \
-    zip \
-    golang-glide \
-    build-essential \
-    appstream \
-    gcc-multilib \
+    xz-utils \ 
+    hfsprogs \ 
+    zip \ 
+    git-lfs \
+    golang-glide \ 
+    build-essential \ 
+    libgtk-3-dev \ 
     libwebkit2gtk-4.0-dev \
-    libgtk-3-dev \
-    libsoup2.4-dev \
-    libglib2.0-dev
-
-RUN apt-get install -y \
-    libwebkit2gtk-4.0-dev:i386 \
-    pkg-config:i386 \
-    libgtk-3-dev:i386 \
-    libsoup2.4-dev:i386 \
-    libgdk-pixbuf2.0-dev:i386 \
-    libpango1.0-dev:i386 \
-    libatk1.0-dev:i386 \
-    libatk-bridge2.0-dev:i386 \
-    libcairo2-dev:i386 \
-    libfontconfig1-dev:i386 \
-    libxkbcommon-dev:i386
+    libc6-dev-i386 \
+    appstream
 
 RUN wget --quiet https://github.com/upx/upx/releases/download/v${UPX_VER}/upx-${UPX_VER}-amd64_linux.tar.xz 2>&1 && \
     tar -xJf ./upx-${UPX_VER}-amd64_linux.tar.xz && \
@@ -51,10 +37,8 @@ RUN ln -s /opt/appimagetool/squashfs-root/AppRun /usr/bin/appimagetool && \
     chmod +x /usr/bin/appimagetool
 
 RUN apt-get autoremove -y && \
-    apt-get autoclean -y && \
     rm -rf /var/lib/apt/lists/* && \
     rm /tmp/appimagetool.AppImage
 
 RUN /usr/bin/upx --help
 RUN /usr/bin/appimagetool --help
-
