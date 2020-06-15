@@ -1,4 +1,4 @@
-# Go-Belt
+# Go-Belt / 64bit
 
 Tools in this Image:
 
