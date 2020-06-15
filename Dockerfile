@@ -1,7 +1,7 @@
-FROM golang:1.11.4-stretch
+FROM golang:1.14.4-stretch
 
-ARG UPX_VER=3.94
-ARG APP_IMAGE_VER=11
+ARG UPX_VER=3.96
+ARG APP_IMAGE_VER=12
 
 COPY template/sources.list /etc/apt/sources.list
 
