@@ -1,4 +1,4 @@
-FROM golang:1.15.0-buster
+FROM golang:1.14.0-stretch
 
 ARG UPX_VER=3.96
 ARG APP_IMAGE_VER=12
