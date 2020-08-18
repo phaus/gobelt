@@ -37,6 +37,11 @@ RUN apt-get install -y \
     libharfbuzz-dev:i386 \
     libxml2-dev:i386
 
+RUN curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | apt-key add - && \
+    echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/migrate.list  && \
+    apt-get update && \
+    apt-get install -y migrate
+
 RUN wget --quiet https://github.com/upx/upx/releases/download/v${UPX_VER}/upx-${UPX_VER}-amd64_linux.tar.xz 2>&1 && \
     tar -xJf ./upx-${UPX_VER}-amd64_linux.tar.xz && \
     mv upx-${UPX_VER}-amd64_linux/upx /usr/bin/ && \
@@ -59,4 +64,4 @@ RUN apt-get autoremove -y && \
 
 RUN /usr/bin/upx --help
 RUN /usr/bin/appimagetool --help
-
+RUN /usr/bin/migrate --help
