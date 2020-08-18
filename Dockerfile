@@ -1,4 +1,4 @@
-FROM golang:1.15.0-buster
+FROM golang:1.14.0-stretch
 
 COPY template/sources.list /etc/apt/sources.list
 
