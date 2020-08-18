@@ -2,6 +2,7 @@ FROM golang:1.14.0-stretch
 
 ARG UPX_VER=3.96
 ARG APP_IMAGE_VER=12
+ARG MIGRATE_VERSION=v4.12.2
 
 COPY template/sources.list /etc/apt/sources.list
 
@@ -37,10 +38,11 @@ RUN apt-get install -y \
     libharfbuzz-dev:i386 \
     libxml2-dev:i386
 
-RUN curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | apt-key add - && \
-    echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/migrate.list  && \
-    apt-get update && \
-    apt-get install -y migrate
+RUN go get -u -d github.com/golang-migrate/migrate/cmd/migrate && \
+    cd $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate && \
+    git checkout $MIGRATE_VERSION && \
+    go build -tags 'postgres' -ldflags="-X main.Version=$(git describe --tags)" -o $GOPATH/bin/migrate $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate && \
+    cp $GOPATH/bin/migrate /usr/bin/migrate
 
 RUN wget --quiet https://github.com/upx/upx/releases/download/v${UPX_VER}/upx-${UPX_VER}-amd64_linux.tar.xz 2>&1 && \
     tar -xJf ./upx-${UPX_VER}-amd64_linux.tar.xz && \
@@ -59,6 +61,7 @@ RUN ln -s /opt/appimagetool/squashfs-root/AppRun /usr/bin/appimagetool && \
 
 RUN apt-get autoremove -y && \
     apt-get autoclean -y && \
+    rm -rf $GOPATH/src && \
     rm -rf /var/lib/apt/lists/* && \
     rm /tmp/appimagetool.AppImage
 
