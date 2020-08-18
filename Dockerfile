@@ -24,6 +24,7 @@ RUN apt-get install -y \
     libglib2.0-dev
 
 RUN apt-get install -y \
+    libicu-dev:i386 \
     libwebkit2gtk-4.0-dev:i386 \
     pkg-config:i386 \
     libgtk-3-dev:i386 \
