@@ -2,7 +2,7 @@
 
 Tools in this Image:
 
-* golang 1.14.4
+* golang 1.15.0
 * appimagetool 12
 * appstream
 * build-essential
