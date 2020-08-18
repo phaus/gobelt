@@ -44,6 +44,7 @@ RUN ln -s /opt/appimagetool/squashfs-root/AppRun /usr/bin/appimagetool && \
     chmod +x /usr/bin/appimagetool
 
 RUN apt-get autoremove -y && \
+    apt-get autoclean -y && \
     rm -rf $GOPATH/src && \
     rm -rf /var/lib/apt/lists/* && \
     rm /tmp/appimagetool.AppImage
